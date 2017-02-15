@@ -1,0 +1,23 @@
+procedureel										                   ready?
+1. -> convergence behaviour local 						per run	                   JM:yes
+2. -> convergence behaviour global 						per run
+3. -> presence of results (*.TAB, *.NC, *.SP1, *.SP2) &					                   JM: almost? CG: Please, don't use subdirectories for NZ and OS, but different filenames like BulkResNZD338 and BulkResOSD338
+      check *.prt (no errors), comp time < 3 hrs, number of iterations < 60, 
+      (or it==60 & >99.5%)							one bulk list for a lot
+      	
+
+
+physical checks										per run					ready?
+1. -> wet or dry output locations (4.2)							
+2.    within realistic limits at output locations (4.3)					bulk plots, after all			less relevant			
+3. -> minimum and maximum Hm0 and Tps and Tm01 per output location over all cases (4.4)	bulk plots, after all
+4. -> consistency Hm0 and Tm01 as function of windspeed, winddir, water level (4.5)	bulk plots, after all
+5. -> spatial (entire domain) maps Hm0, Tps, dHs, dTm					per run (landscape; 2x2 subplots)       yes
+6. -> spatial (detail) maps Hm0, Tps, dHs, dTm						per run                                 yes 
+7. -> proper boundary conditions NZ at OSK, also for overtopping			per run and bulk plots after all
+8. -> proper boundary conditions OS at OSK						per run and bulk plots after all
+9. -> spectra NZ (5 OBS locations) and OS (6 OBS locations + 6 output locations)	per run (like A7.7; A.7.14.c)		JM: almost, cg: please add grid lines and if possible in text the values of Hs and Tmm10 (and maybe within the same panel in red the same spectrum with the right-y axis on log scale)
+																            i hope the locations plot is made only once? shall we (manually) remove the runid?	
+
+
+

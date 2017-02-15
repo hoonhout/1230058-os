@@ -1,0 +1,9 @@
+*.pyc
+*.asv
+*.SWN
+*.SP1
+*.SP2
+*.TAB
+*.PRT
+*~
+old
