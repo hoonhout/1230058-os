@@ -31,7 +31,33 @@ patch([1 57 57 1],[30 30 51 51],'k')
 ylabel([' waterstand OSK OPEN                       waterstand OSK DICHT']);
 xlabel(['wind richting [^oN]']);
 
-welke=[29 300 423 1000 2000]
+mainpath='p:\1230058-os\swanmodel\TEST01\RUN_TEST5\';
+d1=dir('D*');
+for i=1:length(d1)
+	cd(d1(i).name)
+	d2=dir('U*O*');
+
+
+
+runid='U10D203Lm025OO';
+runid='U46D203Lp300OD';
+u10value=[10 20 24 28 30 34 38 42 46 50];
+wlvalue=[-2:0.25:2.75, 2.99 3:0.5:6.5 0:0.25:2.75];
+uu=str2num(runid(2:3));u=find(u10value==uu);
+dd=str2num(runid(5:7));d=round(dd/22.5);
+wl=str2num(runid(10:12))/100;if runid(9)=='m';wl=-wl;end;
+if runid(14)=='O'
+	l=find(wlvalue==wl);
+else
+	l=find(wlvalue==wl) + 29 - 8;
+end
+
+if uu<42
+	welke = (d-1)*51*7 + (u-1)*51  +  l;
+else
+    welke = 5712 + (d-9)*51*3 + (u-8)*51  +  l;
+end
+
 z(welke)=zready(welke)
 pcolor(z)
 patch([1 57 57 1],[30 30 51 51],'k')

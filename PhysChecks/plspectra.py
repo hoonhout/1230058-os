@@ -29,7 +29,7 @@ def plspectra(pathInp, pathOut):
     tmp3=os.path.split(tmp2)[0];
     lb_file=os.path.join(tmp3, '0prepare', 'PhysChecks', 'landboundary.txt'); 
     
-    Hs=[];
+    Hm0=[];
     Tp=[];
     # load results from file
     if region=='NZ':
@@ -55,7 +55,7 @@ def plspectra(pathInp, pathOut):
         while line:
            if any(counter==Locations1) or any(counter==Locations2):
                cells=line.split();
-               Hs.append(cells[3]);
+               Hm0.append(cells[3]);
                Tp.append(cells[4]);
            line=fp.readline();
            counter=counter+1; 
@@ -109,7 +109,7 @@ def plspectra(pathInp, pathOut):
     # plot spectr   
     for i in range(0,len(Locations1)):
         fig2=plt.figure(2, figsize=(10,10))
-        plt.subplot(3,2,i+1)    	
+        ax1=plt.subplot(3,2,i+1)    	
         energy2=[]
         freq2=[]  
         for j in range(0, len(ow.frequency)):
@@ -117,12 +117,22 @@ def plspectra(pathInp, pathOut):
                 energy2.append(ow.energy[Locations1[i]-1,j])
                 freq2.append(ow.frequency[j])
         Hm0_spec=4*(trapz(energy2, freq2))**0.5;
-        Tp_spec=1/freq2(np.where(max(energy2)==energy2));
-        plt.plot(freq2,energy2)
+        Tp_spec=1/freq2[np.argmax(energy2)];
+        plt.text(0.80,0.9, "$H_{m0}$spec = " + "%0.3f" % (Hm0_spec)+ " m", horizontalalignment='center', verticalalignment='center', transform = ax1.transAxes, fontsize=8)
+        plt.text(0.79,0.85, "$H_{m0}$tab = " + "%0.3f" % (float(Hm0[i]))+ " m", horizontalalignment='center', verticalalignment='center', transform = ax1.transAxes, fontsize=8)           
+        plt.text(0.78,0.8, "$T_{p}$spec = " + "%0.3f" % (Tp_spec)+ " s", horizontalalignment='center', verticalalignment='center', transform = ax1.transAxes, fontsize=8)
+        plt.text(0.77,0.75, "$T_{p}$tab = " + "%0.3f" % (float(Tp[i]))+ " s", horizontalalignment='center', verticalalignment='center', transform = ax1.transAxes, fontsize=8) 
+        ax1.plot(freq2,energy2, 'b')
+        ax1.tick_params('y', colors='b')
+                
+        ax2=ax1.twinx();
+        ax2.semilogy(freq2,energy2, 'r')
+        ax1.tick_params('y', colors='r')
         plt.xlim(0,2.5);
         plt.xlabel('Freq (Hz)')
         plt.ylabel('E ($m^{2}$/Hz)')
-        plt.title('Oosterschelde; loc' + str(Locations1[i]))
+        plt.title('Oosterschelde; loc' + str(Locations1[i]));
+        
         plt.tight_layout()
     
     if region == 'OS':

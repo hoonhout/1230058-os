@@ -1,0 +1,10 @@
+*.SWN
+*.PRT
+*.PAR
+OS_runs.*
+exclude_*.txt
+swaninit
+run*
+*.sh
+*.log
+*~

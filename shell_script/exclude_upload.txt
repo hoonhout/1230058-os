@@ -1,0 +1,13 @@
+*.SP1
+*.SP2
+*.TAB
+*.PRT
+*.PAR
+*.NC
+OS_runs.*
+exclude_*.txt
+runCASE
+Errfile
+*.sh
+*.log
+*~
