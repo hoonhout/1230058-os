@@ -1,9 +1,9 @@
 #!/bin/sh
 Dir_name=$1
-cp runSWAN4110_up "${Dir_name:3:4}/$1"
+cp run "${Dir_name:3:4}/$1"
 cp swaninit "${Dir_name:3:4}/$1"
-cp runSWAN4110_up "${Dir_name:3:4}/$2"
+cp run "${Dir_name:3:4}/$2"
 cp swaninit "${Dir_name:3:4}/$2"
 cd "${Dir_name:3:4}/$1"
 echo $PWD
-qsub -q normal-e3 runSWAN4110_up $1 $2
+qsub -q normal-e3 run $1 $2

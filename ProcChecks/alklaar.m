@@ -28,10 +28,13 @@ set(gca,'ytick',[1.5:1:51],'yticklabel',[-2:0.25:2.75, 2.99 3:0.5:6.5 0:0.25:2.7
 plot([-5,141],[30 30],'k','linewidth',2);
 pp=plot([57,57],[30 53],'k','linewidth',2);
 patch([1 57 57 1],[30 30 51 51],'k')
-ylabel(['          OSK OPEN                                        OSK DICHT']);
+ylabel([' waterstand OSK OPEN                       waterstand OSK DICHT']);
 xlabel(['wind richting [^oN]']);
 
 welke=[29 300 423 1000 2000]
 z(welke)=zready(welke)
 pcolor(z)
 patch([1 57 57 1],[30 30 51 51],'k')
+
+
+

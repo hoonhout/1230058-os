@@ -56,7 +56,7 @@ def plspectra(pathInp, pathOut):
            if any(counter==Locations1) or any(counter==Locations2):
                cells=line.split();
                Hs.append(cells[3]);
-               Tp.append(cells[5]);
+               Tp.append(cells[4]);
            line=fp.readline();
            counter=counter+1; 
         fp.close()    
@@ -117,7 +117,7 @@ def plspectra(pathInp, pathOut):
                 energy2.append(ow.energy[Locations1[i]-1,j])
                 freq2.append(ow.frequency[j])
         Hm0_spec=4*(trapz(energy2, freq2))**0.5;
-        Tp_spec=1/(max(freq2))
+        Tp_spec=1/freq2(np.where(max(energy2)==energy2));
         plt.plot(freq2,energy2)
         plt.xlim(0,2.5);
         plt.xlabel('Freq (Hz)')
