@@ -16,17 +16,17 @@ def readPrint(path,region):
     fp=open(path, "r")
     line=fp.readline();
     
-    if region=="OS":
-        while line:
-            if "SWAN is preparing computation" in line:
-                line=fp.readline();
-                break
-            line=fp.readline();
-        while line:
-            if "SWAN is preparing computation" in line:
-                line=fp.readline();
-                break
-            line=fp.readline();    
+#    if region=="OS":
+#        while line:
+#            if "SWAN is preparing computation" in line:
+#                line=fp.readline();
+#                break
+#            line=fp.readline();
+#        while line:
+#            if "SWAN is preparing computation" in line:
+#                line=fp.readline();
+#                break
+#            line=fp.readline();    
         
     while line:
         if "not possible to compute" in line:
@@ -49,18 +49,18 @@ def readPrint(path,region):
     fp=open(path, "r")
     line=fp.readline();
     
-    if region=="OS":
-        while line:
-            if "SWAN is preparing computation" in line:
-                line=fp.readline();
-                break
-            line=fp.readline();
-            
-        while line:
-            if "SWAN is preparing computation" in line:
-                line=fp.readline();
-                break
-            line=fp.readline();        
+#    if region=="OS":
+#        while line:
+#            if "SWAN is preparing computation" in line:
+#                line=fp.readline();
+#                break
+#            line=fp.readline();
+#            
+#        while line:
+#            if "SWAN is preparing computation" in line:
+#                line=fp.readline();
+#                break
+#            line=fp.readline();        
 
     while line:
         if "accuracy OK in" in line: 

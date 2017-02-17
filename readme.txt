@@ -1,9 +1,13 @@
+16 feb
+-Remember to update the repository with the new scripts
+-change the run script to read scripts from repository not 0prepare
+
 15 feb:
 -Dont forget to do dos2unix with the submit script otherwise the folder names are not found!
 -pip install netCDF4 (on the h6)
 -update all scripts for figure properties on the H6
 -plmaps only for OS? why does it take so long to run? FIXED
--make a script (later) telling us which runs are finished or still need to be done
+-make a script (later) telling us which runs are finished or still need to be done Caroline did it.
 
 
 14 feb: 
@@ -17,8 +21,18 @@
 
 -Spectra plot only made for NZ (ask Jamie to check script)
 -plmaps.py cant read from netCDF4 import Dataset (ask Bas what to add to the H6 environment) --->pip install netCDF4 (on the h6)
- 
 
+===================================================================================
+README RUN_TEST
+
+RUN_TEST initial input files (no wind fields, testing the submit scripts individually)
+RUN_TEST2 testing a series of runs being submitted to Amazon and H6 (include wind fields)
+RUN_TEST3 more complete runs for different WL + Dir + Wind Speed with submit script to H6
+RUN_TEST4 save computational time, run more cases from the same direction (problem with no spectra for the low water levels solved)
+RUN_TEST5 testing python scripts, still not fully working, good results for testing of the scripts
+RUN_TEST6 submit the same way the runs are submitted for Amazon, testing goes well, extra editing of the pythong scripts to work for different types of possible results
+RUN_TEST6_2it testing runs with 2 iterations to check the python post-processing scritps
+===================================================================================
 
 ------------------------------------------------------------------------------
 

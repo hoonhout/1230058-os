@@ -18,12 +18,14 @@ def plconvergence(pathInp, pathOut):
     
     if pathInp[-3:-1] == "NZ":
         region="NZ";
+        region2="NZ"
     else:
         region="OS";
+        region2="OO"
     
     # define files to read, Par, and Print
-    fileName=determineRecent(pathInp[0:-3] + "NZ" + pathInp[len(pathInp)-1], "*.o*")
-    filePrint=os.path.join(pathInp[0:-3] + "NZ" + pathInp[len(pathInp)-1], fileName);
+#    fileName=determineRecent(pathInp[0:-3] + "NZ" + pathInp[len(pathInp)-1], "*.o*")
+    filePrint=os.path.join(pathInp[0:-3] + region2 + pathInp[len(pathInp)-1], nameRun +".PRT");
     filePar=os.path.join(pathInp,nameRun + ".PAR");
     
     # read parameter file
@@ -123,7 +125,7 @@ if __name__=='__main__':
     else:
 #        nameRun="U20D315Lp100OOa";    
 #        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST" + os.path.sep + "D315c" + os.path.sep + nameRun
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4\D338\U10D338Lm000OOa"
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4\D338\U10D338Lm000NZa"
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
         plconvergence(pathInp, pathOut)

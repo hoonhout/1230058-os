@@ -1,5 +1,7 @@
 #!/bin/sh
-queue=normal-3
+queue=normal-e3
+cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/run .
+cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/swaninit .
 qsub -q $queue run U10D203Lm025NZa U10D203Lm025OOa
 qsub -q $queue run U10D203Lp025NZa U10D203Lp025OOa
 qsub -q $queue run U10D203Lp299NZa U10D203Lp299OOa
