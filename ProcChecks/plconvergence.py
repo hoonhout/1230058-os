@@ -12,6 +12,8 @@ from readPRINT import readPrint
 from determineRecent import determineRecent
 import os,sys
 
+## only for easternschelt
+
 def plconvergence(pathInp, pathOut):
 
     nameRun=os.path.split(pathInp)[1];
@@ -83,7 +85,10 @@ def plconvergence(pathInp, pathOut):
     plt.close(fig);
         
     for i in range(1, 13):
-        fig2=plt.figure(2, figsize=(30,80))
+        if len(sys.argv) > 1: # Amaury
+            fig2=plt.figure(1, figsize=(20,10))
+        else: # Me
+            fig2=plt.figure(1, figsize=(30,80))
 #        fig2=plt.figure(2, figsize=(10,10))
         ax1=plt.subplot(3,4,i)
         ax1.plot(x1,Results[i-1+12,0,:], 'b')   
@@ -125,7 +130,7 @@ if __name__=='__main__':
     else:
 #        nameRun="U20D315Lp100OOa";    
 #        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST" + os.path.sep + "D315c" + os.path.sep + nameRun
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4\D338\U10D338Lm000NZa"
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4\D338\U10D338Lm000OOa"
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
         plconvergence(pathInp, pathOut)
