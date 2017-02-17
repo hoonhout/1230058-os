@@ -112,7 +112,7 @@ def plspectra(pathInp, pathOut):
     # make figure directory
     pathFigure = os.path.join(pathOut, 'spectra')
     if not os.path.isdir(pathFigure):
-        os.mkdir(pathFigure)
+        os.makedirs(pathFigure)
     
 #    # plot locations
 #    fig1=plt.figure(1)
