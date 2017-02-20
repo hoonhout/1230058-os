@@ -27,10 +27,17 @@ def checkbulk(pathInp, pathOut, region):
     # max iterations vary per region
     if region=='NZ':
         maxIt=80;
-    elif region=='OS':
-        maxIt=60;    
+        region2="NZ"
+    elif region=='OO':
+        maxIt=60;
+        region2="OO"
+        region="OS";
+    elif region=="OD":
+        maxIt=60;
+        region2="OD"
+        region="OS";
     minIt=10;
-    
+        
     # all runs available in directory
     ListRuns=os.listdir(pathInp);
     
@@ -127,12 +134,12 @@ def checkbulk(pathInp, pathOut, region):
             if Summary[counter,2]==1:
                 RunFail3.append(ListRuns[i]);
     ############# check number of iterations ######################################
-            DirectoryRes3=DirectoryRes2[0:-3] +"NZ" + DirectoryRes2[-1]; 
-            fileName=determineRecent(DirectoryRes3, "*.o*")        
+            DirectoryRes3=DirectoryRes2[0:-3] + region2 + DirectoryRes2[-1]; 
+            fileName=determineRecent(DirectoryRes3, "*.PRT*")        
             filePrint= os.path.join(DirectoryRes3,fileName);
     
             # read print file
-            p=readPrint(filePrint, region);
+            p=readPrint(filePrint,region);
             if len(p)<maxIt:
                 Summary[counter,3]=0;
             else:
@@ -210,8 +217,8 @@ if __name__=='__main__':
     if len(sys.argv) > 1:
         checkbulk(sys.argv[1], sys.argv[2], sys.argv[3]) 
     else:
-        Dir="D338";
-        region='NZ'; # NZ or OS
-        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST4" + os.path.sep + Dir;
+        Dir="D293";
+        region='NZ'; # NZ or OO or OD
+        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST7" + os.path.sep + Dir;
         pathOut=r'p:\1230058-os\swanmodel\TEST01\CONTROL';
         checkbulk(pathInp, pathOut, region);
