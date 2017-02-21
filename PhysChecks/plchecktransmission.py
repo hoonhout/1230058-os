@@ -4,6 +4,8 @@ Created on Thu Feb 02 15:39:27 2017
 
 @author: morris
 """
+import matplotlib
+matplotlib.use('Agg')
 import os, sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -146,7 +148,11 @@ def plchecktransmission(pathInp, pathOut):
             result_O_Closed=result_O_Closed_T;
         for i in range(0, len(Directions)):       
             for j in range(0,2):
-                fig=plt.figure(1, figsize=(30,80))
+                if len(sys.argv) > 1: # Amaury
+                    fig=plt.figure(1, figsize=(19,9))
+                else: # Me
+                    fig=plt.figure(1, figsize=(30,80))                
+                
                 figEmpty=1;
                 if j==0:
                     plt.title("SWAN resultaten nabij OSK op NZ (" + X[0][0:-1] +"," + Y[0][0:-1] + ") en OS (" + X[1][0:-1] +"," + Y[1][0:-1] + " )" )
@@ -159,7 +165,14 @@ def plchecktransmission(pathInp, pathOut):
                             figEmpty=0;
                 else:
                     plt.title("SWAN resultaten nabij OSK op NZ(" + X[0] +"," + Y[0] + ") en OS(" + X[1] +"," + Y[1] + " )" )
-                
+                    for k in range(0, len(WindSpd)):
+                        s1mask = np.isfinite(result_K[:,k,i])
+                        s2mask = np.isfinite(result_O_Closed[:,k,i])
+                        plt.plot(WatLev[s1mask], result_K[s1mask,k,i], "-x", c=color[k], label=str(WindSpd[k])+"m/s NZ", markersize=10)
+                        plt.plot(WatLev[s2mask], result_O_Closed[s2mask,k,i], "--x", c=color[k], label=str(WindSpd[k])+"m/s O", markersize=10)
+                        if not all(np.isnan(result_K[:,k,i])):
+                            figEmpty=0;
+                    
                 if figEmpty == 0:
                     plt.xlabel("Waterstand [m + NAP]", fontsize=14);
                     
@@ -185,7 +198,7 @@ if __name__=='__main__':
         plchecktransmission(sys.argv[1], sys.argv[2])
 
     else:
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4"
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST7"
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
         plchecktransmission(pathInp, pathOut);  

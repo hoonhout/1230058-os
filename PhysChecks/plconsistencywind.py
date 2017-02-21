@@ -75,7 +75,10 @@ def plconsistencywind(pathInp, pathOut):
                 for k in range(0, len(WatLev)):
                     for l in range(0, len(OpenClose)):
                         # initialize fig;
-                        fig=plt.figure(1, figsize=(30,80))
+                        if len(sys.argv) > 1: # Amaury
+                            fig=plt.figure(1, figsize=(16,6))
+                        else: # Me
+                            fig=plt.figure(1, figsize=(30,80)) 
                         figPlot=0;
                         for j in range(0, len(WindSpd)):
                             if WatLev[k]<0:
@@ -121,15 +124,15 @@ def plconsistencywind(pathInp, pathOut):
                             intersections, listIntersect, locIntersect=intersect(xVal, result, 0);
                                      
                         if figPlot==1:
-                            plt.xlabel("Location #");
+                            plt.xlabel("Locatie # (vanaf zuidwest tegen de klok in) ");
                             if p==0:
                                 plt.ylabel("$Hm0$ [m]")
                             else:
                                 plt.ylabel("Tm-1,0 [s]")
                             if intersections==1 and p==0:
-                                plt.text(0.9,0.8, "Warning, crossings for Hm0>0.5m", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
+                                plt.text(0.7,0.8, "Warning, crossings for Hm0>0.5m", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
                             elif intersections==1 and p==1:  
-                                plt.text(0.9,0.8, "Warning, crossings", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
+                                plt.text(0.7,0.8, "Warning, crossings", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
                             mylist = list(set(locIntersect)); # list of locations with problem
                             for m in range(0, len(mylist)):
                                 plt.plot([xVal[mylist[m]],xVal[mylist[m]]], [0,0.1], '-k' )
@@ -166,7 +169,7 @@ if __name__=='__main__':
         plconsistencywind(sys.argv[1], sys.argv[2])
 
     else:
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4";
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST7";
         pathOut=r'p:\1230058-os\swanmodel\TEST01\CONTROL';
         
         plconsistencywind(pathInp, pathOut); 

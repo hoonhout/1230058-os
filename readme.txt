@@ -5,6 +5,7 @@
 20 feb
 - CG: vraag joost den bieman in hoeverre bijv figuur 'p:\1230058-os\swanmodel\TEST01\CONTROL\consistencywind\D338Lp650OOa_hs.png' consistent is met fig 4.2 en appendix C.7 ofzo  uit zijn OS rapportage
 - Decided to increase the number of iterations for OS from 60 to 80, after checking the convergence plots and the computational time (bulk script) (ASK Caroline after meeting with Alfons 21Feb)
+			DEcided to change to 80 it and 101% convergence (after meeting with Alfons)
 - Jamie to update scripts to read OO and OD (when necessary to specify the region) {remember to submit updated scripts to the script directory} --> DONE JM
 - SOURCE PY:
 	source /opt/python/pythonsource.sh
