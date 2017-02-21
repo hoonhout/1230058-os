@@ -1,0 +1,61 @@
+#!/bin/sh
+#$ -cwd
+#$ -N SWAN
+swan_omp_exe=/p/1230058-os/swanmodel/SWANNC8/swan.exe
+export LD_LIBRARY_PATH=/p/1230058-os/swanmodel/SWANNC8/
+export OMP_NUM_THREADS=8
+
+echo ----------------------------------------------------------------------
+echo $swan_omp_exe
+echo with OpenMP on linux cluster.
+echo SGE_O_WORKDIR : $SGE_O_WORKDIR
+echo HOSTNAME : $HOSTNAME
+echo OMP_NUM_THREADS : $OMP_NUM_THREADS
+echo $1
+echo ----------------------------------------------------------------------
+
+### Copy swaninit
+Dir_name=$1
+cp swaninit "${Dir_name:3:4}/$1"
+
+rundir=$PWD
+cd "${Dir_name:3:4}/$1"
+echo $PWD
+
+### General, start SWAN.
+
+cp "$1".SWN INPUT
+starttime=`date +%s`
+$swan_omp_exe
+endtime=`date +%s`
+
+runtime=$((endtime-starttime))
+echo ----------------------------------------------------------------------
+echo "The run was completed after $((runtime / 60)) minutes"
+echo ----------------------------------------------------------------------
+
+cp PRINT "$1".PRT
+rm INPUT
+rm PRINT
+rm swaninit
+rm norm_end
+
+cd $rundir
+
+echo Post-processing will start.
+
+outdir=/p/1230058-os/swanmodel/TEST01/CONTROL/
+scriptdir=/p/1230058-os/swanmodel/TEST01/SCRIPTS/PhysChecks/
+cd $scriptdir
+python plspectra.py "$rundir/${Dir_name:3:4}/$1" $outdir
+python plmaps.py "$rundir/${Dir_name:3:4}/$1" $outdir
+
+scriptdir=/p/1230058-os/swanmodel/TEST01/SCRIPTS/ProcChecks/
+cd $scriptdir
+python plconvergence.py "$rundir/${Dir_name:3:4}/$1" $outdir
+
+
+echo Post-processing is finished.
+echo ----------------------------------------------------------------------
+
+cd $rundir
