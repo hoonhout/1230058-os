@@ -171,13 +171,15 @@ def plspectra(pathInp, pathOut):
         plt.minorticks_off()
         
         plt.xlim(0,2.5);
-        
-        plt.title('Oosterschelde; loc' + str(Locations1[i]));
+        if region =="OS":
+            plt.title('Oosterschelde; loc' + str(Locations1[i]));
+        else:
+            plt.title('Noord Zee; loc' + str(Locations1[i]));
         
         plt.tight_layout()
     
     if region == 'OS':
-	    fig2.savefig(os.path.join(pathFigure, nameRun+"_spectra"+region+"1"), dpi=200)   
+	    fig2.savefig(os.path.join(pathFigure, nameRun+"_spectra1"), dpi=200)   
 	    plt.close(fig2);   
       
     for i in range(0,len(Locations2)):
@@ -212,6 +214,8 @@ def plspectra(pathInp, pathOut):
         ax1.tick_params('y', colors='b')
         if i==4 or i==5:
             plt.xlabel('Freq (Hz)')
+        if region=="NZ":
+            plt.xlabel('Freq (Hz)')
         plt.ylabel('E ($m^{2}$/Hz)')
         ax1.grid();
         ax2=ax1.twinx();
@@ -221,21 +225,24 @@ def plspectra(pathInp, pathOut):
         plt.minorticks_off()
                
         plt.xlim(0,2.5);  
-        plt.title('Oosterschelde; loc' + str(Locations2[i]))
+        if region =="OS":
+            plt.title('Oosterschelde; loc' + str(Locations1[i]));
+        else:
+            plt.title('Noord Zee; loc' + str(Locations1[i]));
         plt.tight_layout()
     
     if region == "NZ":
-        fig2.savefig(os.path.join(pathFigure, nameRun+"_spectra" + region), dpi=200)    
+        fig2.savefig(os.path.join(pathFigure, nameRun+"_spectra"), dpi=200)    
         plt.close(fig2); 
     else:
-	    fig3.savefig(os.path.join(pathFigure, nameRun+"_spectra"+ region + "2"), dpi=200)
+	    fig3.savefig(os.path.join(pathFigure, nameRun+"_spectra2"), dpi=200)
 	    plt.close(fig3);       
 
 if __name__=='__main__':
     if len(sys.argv) > 1:
         plspectra(sys.argv[1], sys.argv[2])  
     else:
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST6_2it\D360\U38D360Lm150NZa"        
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST4\D338\U30D338Lp300OOa"        
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
     
         plspectra(pathInp, pathOut);

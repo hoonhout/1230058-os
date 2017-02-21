@@ -22,17 +22,26 @@ def plglobmaps(pathInp, pathOut):
 
     ldb=np.loadtxt("landboundary.txt")
     
+    if runid[12:14]=='NZ':
+       mstep = 8
+       nstep = 8
+       ax = [10, 45, 395, 430]
+    else:
+       mstep = 50
+       nstep = 80
+       ax = [36.50, 74.40, 383.00, 413.50] 
+
     data_read = Dataset(fi,'r')
     x     = data_read.variables['x'][:,:]/1000
     y     = data_read.variables['y'][:,:]/1000
     d     = data_read.variables['theta0'][:]
-    d     = np.reshape(d,(1705,1861))
+    d     = np.reshape(d,(len(x),len(x[0])))
 
     parameters = ['hs','dhs','tmm10','dtm']
     fig = plt.figure()
     for ind, name in enumerate(parameters):
         a = data_read.variables[name][:]
-        z = np.reshape(a,(1705,1861))
+        z = np.reshape(a,(len(x),len(x[0])))
         plt.subplot(2,2,ind+1)
         plt.pcolor(x , y , z)
         plt.plot(ldb[:,0]/1000, ldb[:,1]/1000, '-g', linewidth=0.2)
@@ -44,11 +53,11 @@ def plglobmaps(pathInp, pathOut):
         if ind==0 or ind==2:
             plt.ylabel('Y [km]',fontsize = 8)
         if ind==0:
-            pldir(x,y,d,'k',50,80)
+            pldir(x,y,d,'k',mstep,nstep)
         if ind==0 or ind==1:
             plt.xticks([]);
         plt.axis('equal')
-        plt.axis([36.50 ,  74.40, 383.00 , 413.50])
+        plt.axis(ax)
     fig.savefig(os.path.join(pathOut, runid + '.png'), dpi=200)  
     data_read.close()    
     plt.close(fig) 
@@ -96,7 +105,7 @@ def pllocmaps(pathInp, pathOut):
         
     for ind, name in enumerate(parameters):
         a = data_read.variables[name][:]
-        z = np.reshape(a,(1705,1861))
+        z = np.reshape(a,(len(x),len(x[0])))
                  
         fig = plt.figure()
         plt.pcolor(x , y , z)

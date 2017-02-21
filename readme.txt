@@ -1,18 +1,43 @@
+21 Feb
+- Run take longer to Run in Amazon. The checkbulk scirpt says all 500 runs took more than 180 minutes to run in total (even for the NZ grid???). 
+- For now it was decided to keep all the output figures and files and just copy them to the P drive. At a later stage it might be needed to create a visualizer to see figure directly on Amazon.
+
+20 feb
+- CG: vraag joost den bieman in hoeverre bijv figuur 'p:\1230058-os\swanmodel\TEST01\CONTROL\consistencywind\D338Lp650OOa_hs.png' consistent is met fig 4.2 en appendix C.7 ofzo  uit zijn OS rapportage
+- Decided to increase the number of iterations for OS from 60 to 80, after checking the convergence plots and the computational time (bulk script) (ASK Caroline after meeting with Alfons 21Feb)
+- Jamie to update scripts to read OO and OD (when necessary to specify the region) {remember to submit updated scripts to the script directory} --> DONE JM
+- SOURCE PY:
+	source /opt/python/pythonsource.sh
+	source /p/1230058-os/virtualenvs/oosterschelde/bin/activate
+- RUN: checkbulk.py
+		python checkbulk.py /p/1230058-os/swanmodel/TEST01/RUN_TEST7/D293 /p/1230058-os/swanmodel/TEST01/CONTROL 'OS'
+		python checkbulk.py /p/1230058-os/swanmodel/TEST01/RUN_TEST7/D293 /p/1230058-os/swanmodel/TEST01/CONTROL 'NZ'
+		
+-  Updated scripts have to be pulled to the SCRIPTS directory (plmaps IKDENKZO from Caroline and plspectra from Jamie, etc)  -->DONE AC
+
+-Update the run script to include the new scripts (plmaps for NZ $1 and for OS $2) ---> DONE AC
+
+
+17 feb
+-write up the steps to build the runs (wind fields, master_input files, closed open cases, submit scripts, python scripts, Amazon, transmission, installation in the H6, repository, etc...)
+-finshed updating the scripts (convergence, spectra) -->DONE JM
+-Still have to prepare the closed runs script (decide which post-processing is needed, etc)
+
 16 feb
--Remember to update the repository with the new scripts
--change the run script to read scripts from repository not 0prepare
+-Remember to update the repository with the new scripts -->DONE AC
+-change the run script to read scripts from repository not 0prepare ---> DONE AC
 
 15 feb:
 -Dont forget to do dos2unix with the submit script otherwise the folder names are not found!
 -pip install netCDF4 (on the h6)
--update all scripts for figure properties on the H6
+-update all scripts for figure properties on the H6  --->C based settings
 -plmaps only for OS? why does it take so long to run? FIXED
--make a script (later) telling us which runs are finished or still need to be done Caroline did it.
+-make a script (later) telling us which runs are finished or still need to be done --> FIXED Caroline did it (Proc checks \ watisklaar.m)
 
 
 14 feb: 
 
-- to be done run_test5: 3 directions, 3 speeds, 4 water levels
+- to be done run_test5: 3 directions, 3 speeds, 4 water levels --> DONE
   including postprocessing scripts  __> SUBMITTED 14-FEB-2017 (including plspectra.py + plconvergence.py)
 
 - DO NOT FORGET TO USE THE PROPER (OFFICIAL) SWAN EXECUTABLE FROM HUIB TANIS ONCE IT IS READY ---> How will I know when this is realeased? Ask Caroline 14-Feb-2017
@@ -30,8 +55,10 @@ RUN_TEST2 testing a series of runs being submitted to Amazon and H6 (include win
 RUN_TEST3 more complete runs for different WL + Dir + Wind Speed with submit script to H6
 RUN_TEST4 save computational time, run more cases from the same direction (problem with no spectra for the low water levels solved)
 RUN_TEST5 testing python scripts, still not fully working, good results for testing of the scripts
-RUN_TEST6 submit the same way the runs are submitted for Amazon, testing goes well, extra editing of the pythong scripts to work for different types of possible results
-RUN_TEST6_2it testing runs with 2 iterations to check the python post-processing scritps
+RUN_TEST6 submit the same way the runs are submitted for Amazon, testing goes well, extra editing of the python scripts to work for different types of possible results
+RUN_TEST6_2it testing runs with 2 iterations to check the python post-processing scripts
+RUN_TEST7 running in H6 and in Amazon (running D293 with a combination of Wind Speeds and Water levels, all python scripts should work, results will be ready before Monday 20th on the H6)
+
 ===================================================================================
 
 ------------------------------------------------------------------------------

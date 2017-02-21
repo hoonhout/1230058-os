@@ -18,7 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import cm 
 
-def intersect(x, test):
+def intersect(x, test, limit):
     foundIntersect=0;
     locIntersect=[];
     listIntersect=[];
@@ -28,8 +28,8 @@ def intersect(x, test):
         
     for i in range(0,len(test[:,1])):
         for j in range(i+1, len(test[:,1])): 
-            test[i,test[i,:]<0.5]=np.nan;
-            test[i,test[j,:]<0.5]=np.nan;
+            test[i,test[i,:]<limit]=np.nan;
+            test[i,test[j,:]<limit]=np.nan;
             temp= np.diff(np.sign(test[i,:] - test[j,:]));
             temp = np.ma.masked_where(np.isnan(temp), temp)
 #            if np.any(np.diff(np.sign(test[i,:] - test[j,:])) != 0):
@@ -67,79 +67,97 @@ def plconsistencywind(pathInp, pathOut):
     xVal=np.zeros(2038);
     xVal=np.linspace(1, 2038, num=2038)
     
-    # determine available results
-    for i in range(0, len(Directions)):
-        if os.path.isdir(os.path.join(pathInp, "D" + str(Directions[i]))):
-            pathRes2=os.path.join(pathInp, "D" + str(Directions[i]));
-            for k in range(0, len(WatLev)):
-                for l in range(0, len(OpenClose)):
-                    # initialize fig;
-                    fig=plt.figure(1, figsize=(30,80))
-                    figPlot=0;
-                    for j in range(0, len(WindSpd)):
-                        if WatLev[k]<0:
-                            WatKey='Lm';
-                            WatLev_tmp=WatLev[k]*-1;
-                        else:
-                            WatKey='Lp';
-                            WatLev_tmp=WatLev[k];
-                  
-                        RunID_O="U" + str(WindSpd[j]) +"D" + str(Directions[i]) + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
-                        Tab_O = RunID_O + "_01.TAB"
-                         
-                        if os.path.exists(os.path.join(pathRes2, RunID_O,Tab_O)):
-                            fp=open(os.path.join(pathRes2, RunID_O,Tab_O)) 
-                            #skip header
-                            counter=0;
-                            for m in range(0,9):
-                                line=fp.readline();                        
-                            while line:
-                                cells=line.split();
-                                result[j,counter]=cells[3];
-                                counter=counter+1;
-                                line=fp.readline();
-                            fp.close()
-                            
-                            if not all(np.isnan(result[j,:])):
-    #                            plt.plot(range(1, 2039), result[j,:], "-", c=color[j], label=str(WindSpd[j])+"m/s NZ")                         
-                                 result[j,result[j,:]==-9]=np.nan;
-                                 xVal = np.ma.masked_where(np.isnan(result[j,:]), xVal)
-                                 yVal = np.ma.masked_where(np.isnan(result[j,:]), result[j,:])
-                                 h1=plt.subplot(2,1,1)                                
-                                 plt.plot(xVal[0:1038], yVal[0:1038], c=color[j], label=str(WindSpd[j])+"m/s")
-                                 plt.subplot(2,1,2)                                
-                                 plt.plot(xVal[1038:], yVal[1038:], c=color[j], label=str(WindSpd[j])+"m/s")
-                                 figPlot=1;
-                                 xVal=np.linspace(1, 2038, num=2038)
-                                 
-                    intersections, listIntersect, locIntersect=intersect(xVal, result);
-                    
-                                 
-                    if figPlot==1:
-                        plt.xlabel("Location #");
-                        plt.ylabel("Wave Height [m]")
-                        if intersections==1:
-                            plt.text(0.9,0.8, "Warning, crossings for Hm0>0.5", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
-                        mylist = list(set(locIntersect)); # list of locations with problem
-                        for m in range(0, len(mylist)):
-                            plt.plot([xVal[mylist[m]],xVal[mylist[m]]], [0,0.1], '-k' )
-                        plt.xlim([1038,2038])    
-                        plt.subplot(2,1,1)
-                        for m in range(0, len(mylist)):
-                            plt.plot([xVal[mylist[m]],xVal[mylist[m]]], [0,0.1], '-k' )
-                        plt.xlim([1,1038])
-                        plt.ylabel("Wave Height [m]")
-                        plt.legend(bbox_to_anchor=(1.01, 1), loc=2, borderaxespad=0.)
-                        if WatLev[k]<0:
-                            WatKey='Lm';
-                            WatLev_tmp=WatLev[k]*-1;
-                        else:
-                            WatKey='Lp';
-                            WatLev_tmp=WatLev[k];
-                        fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_hs" +".png") , dpi=300)   
-                        plt.close(fig);
+    for p in range(0,2):
+        # determine available results
+        for i in range(0, len(Directions)):
+            if os.path.isdir(os.path.join(pathInp, "D" + str(Directions[i]))):
+                pathRes2=os.path.join(pathInp, "D" + str(Directions[i]));
+                for k in range(0, len(WatLev)):
+                    for l in range(0, len(OpenClose)):
+                        # initialize fig;
+                        fig=plt.figure(1, figsize=(30,80))
+                        figPlot=0;
+                        for j in range(0, len(WindSpd)):
+                            if WatLev[k]<0:
+                                WatKey='Lm';
+                                WatLev_tmp=WatLev[k]*-1;
+                            else:
+                                WatKey='Lp';
+                                WatLev_tmp=WatLev[k];
+                      
+                            RunID_O="U" + str(WindSpd[j]) +"D" + str(Directions[i]) + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                            Tab_O = RunID_O + "_01.TAB"
+                             
+                            if os.path.exists(os.path.join(pathRes2, RunID_O,Tab_O)):
+                                fp=open(os.path.join(pathRes2, RunID_O,Tab_O)) 
+                                #skip header
+                                counter=0;
+                                for m in range(0,9):
+                                    line=fp.readline();                        
+                                while line:
+                                    cells=line.split();
+                                    if p==0:
+                                        result[j,counter]=cells[3];
+                                    else:
+                                          result[j,counter]=cells[6];   
+                                    counter=counter+1;
+                                    line=fp.readline();
+                                fp.close()
+                                
+                                if not all(np.isnan(result[j,:])):
+        #                            plt.plot(range(1, 2039), result[j,:], "-", c=color[j], label=str(WindSpd[j])+"m/s NZ")                         
+                                     result[j,result[j,:]==-9]=np.nan;
+                                     xVal = np.ma.masked_where(np.isnan(result[j,:]), xVal)
+                                     yVal = np.ma.masked_where(np.isnan(result[j,:]), result[j,:])
+                                     h1=plt.subplot(2,1,1)                                
+                                     plt.plot(xVal[0:1038], yVal[0:1038], c=color[j], label=str(WindSpd[j])+"m/s")
+                                     plt.subplot(2,1,2)                                
+                                     plt.plot(xVal[1038:], yVal[1038:], c=color[j], label=str(WindSpd[j])+"m/s")
+                                     figPlot=1;
+                                     xVal=np.linspace(1, 2038, num=2038)
+                        if p==0:             
+                            intersections, listIntersect, locIntersect=intersect(xVal, result, 0.5);
+                        else:  
+                            intersections, listIntersect, locIntersect=intersect(xVal, result, 0);
+                                     
+                        if figPlot==1:
+                            plt.xlabel("Location #");
+                            if p==0:
+                                plt.ylabel("$Hm0$ [m]")
+                            else:
+                                plt.ylabel("Tm-1,0 [s]")
+                            if intersections==1 and p==0:
+                                plt.text(0.9,0.8, "Warning, crossings for Hm0>0.5m", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
+                            elif intersections==1 and p==1:  
+                                plt.text(0.9,0.8, "Warning, crossings", horizontalalignment='center', verticalalignment='center', fontsize=14, transform=h1.transAxes)                    
+                            mylist = list(set(locIntersect)); # list of locations with problem
+                            for m in range(0, len(mylist)):
+                                plt.plot([xVal[mylist[m]],xVal[mylist[m]]], [0,0.1], '-k' )
+                            plt.xlim([1038,2038])
+                            plt.grid()
+                            plt.subplot(2,1,1)
+                            for m in range(0, len(mylist)):
+                                plt.plot([xVal[mylist[m]],xVal[mylist[m]]], [0,0.1], '-k' )
+                            plt.xlim([1,1038])
+                            plt.grid()
+                            if p==0:
+                                plt.ylabel("$Hm0$ [m]")
+                            else:
+                                plt.ylabel("Tm-1,0 [s]")
+                            plt.legend(bbox_to_anchor=(1.01, 1), loc=2, borderaxespad=0.)
+                            if WatLev[k]<0:
+                                WatKey='Lm';
+                                WatLev_tmp=WatLev[k]*-1;
+                            else:
+                                WatKey='Lp';
+                                WatLev_tmp=WatLev[k];
+                            if p==0:
+                                fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_hs" +".png") , dpi=300)
+                            else:
+                                fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_tm" +".png") , dpi=300) 
+                            plt.close(fig);
                                         
-# specify which results interested in
+
 
 
 # results directory

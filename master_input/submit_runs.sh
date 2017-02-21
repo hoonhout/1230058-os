@@ -1,5 +1,54 @@
-#!/bin/shqueue=normal-3e3
+#!/bin/sh
+queue=normal-e3
 cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/run .
-qsub -q $queue runU38D360Lm150NZa U38D360Lm150OOa
-qsub -q $queue runU38D360Lm175NZa U38D360Lm175OOa
-qsub -q $queue runU38D360Lm200NZa U38D360Lm200OOa
+cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/swaninit .
+qsub -q $queue runU10D293Lm100NZa U10D293Lm100OOa
+qsub -q $queue runU10D293Lm200NZa U10D293Lm200OOa
+qsub -q $queue runU10D293Lp100NZa U10D293Lp100OOa
+qsub -q $queue runU10D293Lp450NZa U10D293Lp450OOa
+qsub -q $queue runU10D293Lp650NZa U10D293Lp650OOa
+qsub -q $queue runU20D293Lm100NZa U20D293Lm100OOa
+qsub -q $queue runU20D293Lm200NZa U20D293Lm200OOa
+qsub -q $queue runU20D293Lp100NZa U20D293Lp100OOa
+qsub -q $queue runU20D293Lp450NZa U20D293Lp450OOa
+qsub -q $queue runU20D293Lp650NZa U20D293Lp650OOa
+qsub -q $queue runU24D293Lm100NZa U24D293Lm100OOa
+qsub -q $queue runU24D293Lm200NZa U24D293Lm200OOa
+qsub -q $queue runU24D293Lp100NZa U24D293Lp100OOa
+qsub -q $queue runU24D293Lp450NZa U24D293Lp450OOa
+qsub -q $queue runU24D293Lp650NZa U24D293Lp650OOa
+qsub -q $queue runU28D293Lm100NZa U28D293Lm100OOa
+qsub -q $queue runU28D293Lm200NZa U28D293Lm200OOa
+qsub -q $queue runU28D293Lp100NZa U28D293Lp100OOa
+qsub -q $queue runU28D293Lp450NZa U28D293Lp450OOa
+qsub -q $queue runU28D293Lp650NZa U28D293Lp650OOa
+qsub -q $queue runU30D293Lm100NZa U30D293Lm100OOa
+qsub -q $queue runU30D293Lm200NZa U30D293Lm200OOa
+qsub -q $queue runU30D293Lp100NZa U30D293Lp100OOa
+qsub -q $queue runU30D293Lp450NZa U30D293Lp450OOa
+qsub -q $queue runU30D293Lp650NZa U30D293Lp650OOa
+qsub -q $queue runU34D293Lm100NZa U34D293Lm100OOa
+qsub -q $queue runU34D293Lm200NZa U34D293Lm200OOa
+qsub -q $queue runU34D293Lp100NZa U34D293Lp100OOa
+qsub -q $queue runU34D293Lp450NZa U34D293Lp450OOa
+qsub -q $queue runU34D293Lp650NZa U34D293Lp650OOa
+qsub -q $queue runU38D293Lm100NZa U38D293Lm100OOa
+qsub -q $queue runU38D293Lm200NZa U38D293Lm200OOa
+qsub -q $queue runU38D293Lp100NZa U38D293Lp100OOa
+qsub -q $queue runU38D293Lp450NZa U38D293Lp450OOa
+qsub -q $queue runU38D293Lp650NZa U38D293Lp650OOa
+qsub -q $queue runU42D293Lm100NZa U42D293Lm100OOa
+qsub -q $queue runU42D293Lm200NZa U42D293Lm200OOa
+qsub -q $queue runU42D293Lp100NZa U42D293Lp100OOa
+qsub -q $queue runU42D293Lp450NZa U42D293Lp450OOa
+qsub -q $queue runU42D293Lp650NZa U42D293Lp650OOa
+qsub -q $queue runU46D293Lm100NZa U46D293Lm100OOa
+qsub -q $queue runU46D293Lm200NZa U46D293Lm200OOa
+qsub -q $queue runU46D293Lp100NZa U46D293Lp100OOa
+qsub -q $queue runU46D293Lp450NZa U46D293Lp450OOa
+qsub -q $queue runU46D293Lp650NZa U46D293Lp650OOa
+qsub -q $queue runU50D293Lm100NZa U50D293Lm100OOa
+qsub -q $queue runU50D293Lm200NZa U50D293Lm200OOa
+qsub -q $queue runU50D293Lp100NZa U50D293Lp100OOa
+qsub -q $queue runU50D293Lp450NZa U50D293Lp450OOa
+qsub -q $queue runU50D293Lp650NZa U50D293Lp650OOa

@@ -1,9 +1,9 @@
 procedureel										                   ready?
-1. -> convergence behaviour local 						per run	                   JM:yes
+1. -> convergence behaviour local 						per run	                   JM:yes p:\1230058-os\swanmodel\TEST01\0prepare\ProcChecks\plconvergence.py
 2. -> convergence behaviour global 						per run
 3. -> presence of results (*.TAB, *.NC, *.SP1, *.SP2) &					                   JM:yes
       check *.prt (no errors), comp time < 3 hrs, number of iterations < 60, 
-      (or it==60 & >99.5%)							one bulk list for a lot
+      (or it==60 & >99.5%)							one bulk list for a lot    p:\1230058-os\swanmodel\TEST01\0prepare\ProcChecks\checkbulk.py
       	
 
 
