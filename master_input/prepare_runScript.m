@@ -1,5 +1,5 @@
 clear
-RunDir='p:\1230058-os\swanmodel\TEST01\RUN_TEST7\';
+RunDir='p:\1230058-os\swanmodel\TEST01\RUN_TEST8\';
 DirDir=dir([RunDir 'D*']);
 
 for uu=1:length(DirDir)
@@ -8,7 +8,7 @@ for uu=1:length(DirDir)
 end
 
 
-fname=['submit_runs.sh'];
+fname=['submit_runsNZOO.sh'];
 fsco = fopen(fname,'w+t');
 fprintf(fsco,'%s\n','#!/bin/sh');
 fprintf(fsco,'%s\n','queue=normal-e3');
@@ -17,6 +17,30 @@ fprintf(fsco,'%s\n','cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/swa
 for d=1:size((WindDirNZ),1)
     for c=1:size((WindDirNZ),2)
         fprintf(fsco,'qsub -q $queue run %s\n',[WindDirNZ(d,c).name ' ' WindDirOO(d,c).name]);
+    end
+end
+fclose(fsco)
+unix2dos(fname,true)
+
+%% OD
+clear
+RunDir='p:\1230058-os\swanmodel\TEST01\RUN_TEST8\';
+DirDir=dir([RunDir 'D*']);
+
+for uu=1:length(DirDir)
+    WindDirOD(uu,:)=dir([RunDir DirDir(uu).name '\*ODa']);
+end
+
+
+fname=['submit_runsOD.sh'];
+fsco = fopen(fname,'w+t');
+fprintf(fsco,'%s\n','#!/bin/sh');
+fprintf(fsco,'%s\n','queue=normal-e3');
+fprintf(fsco,'%s\n','cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/run_OD .')
+fprintf(fsco,'%s\n','cp /p/1230058-os/swanmodel/TEST01/0prepare/shell_script/swaninit .')
+for d=1:size((WindDirOD),1)
+    for c=1:size((WindDirOD),2)
+        fprintf(fsco,'qsub -q $queue run_OD %s\n',[WindDirOD(d,c).name]);
     end
 end
 fclose(fsco)

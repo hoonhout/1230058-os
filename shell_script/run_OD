@@ -13,10 +13,18 @@ echo HOSTNAME : $HOSTNAME
 echo OMP_NUM_THREADS : $OMP_NUM_THREADS
 echo $1
 echo ----------------------------------------------------------------------
-
 ### Copy swaninit
 Dir_name=$1
 cp swaninit "${Dir_name:3:4}/$1"
+
+### Tranmission NZ to OD
+Transdir=$1
+NZdir="${Transdir:0:12}NZa"
+cd "${Dir_name:3:4}/$NZdir"
+source /opt/python/pythonsource.sh
+source /p/1230058-os/virtualenvs/oosterschelde/bin/activate
+wavetrans $NZdir_01.SP2 /p/1230058-os/swanmodel/TEST01/INPVAR/RVW/ --closed
+
 
 rundir=$PWD
 cd "${Dir_name:3:4}/$1"

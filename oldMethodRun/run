@@ -1,0 +1,60 @@
+#!/bin/bash
+##WTI VERSION 1
+
+# script to run single swan run: called as ./start_job <caseid>
+
+# clear screen
+clear
+
+# set name of executable
+# swan_exe=/opt/swan/swan_4072ABCDE_del_l64_i11_omp.exe
+swan_exe=/opt/swan/swan_4072ABCDE_del_l64_i11_omp.exe
+
+# set path to libraries
+export LD_LIBRARY_PATH=/opt/swan/libraries_l64_i11/
+
+# cleanup old results
+rm -rf RES
+rm -rf LOG
+
+# make directory structure
+mkdir RES
+mkdir LOG
+
+# apply patch (extract bod and pnt file)
+tar -xf INP/patch20150513.tgz  -C ../../ALGswn
+
+# copy input file
+cp INP/U11D045S01.swn INPUT
+
+# wait for random period >10 and <60 sec
+date '+%Y %m %d %H %M %S' > "LOG/"U11D045S01.tim
+((wt=($RANDOM % 50 +10 )));echo $wt;sleep $wt
+
+# log start date and time of computation
+date '+%Y %m %d %H %M %S' >> "LOG/"U11D045S01.tim
+
+# do the computation
+"$swan_exe"
+
+# log end date and time (YYYY MM DD hh mm ss) of computation
+date '+%Y %m %d %H %M %S' >> "LOG/"U11D045S01.tim
+
+# copy logging information
+cp PRINT    LOG/U11D045S01.prt
+cp Errfile  LOG/U11D045S01.err
+cp swaninit LOG/swaninit
+cp norm_end LOG/norm_end
+
+# cleanup
+rm PRINT
+rm Errfile
+rm swaninit
+rm norm_end
+rm INPUT
+
+# pack the results
+# cd ../
+# tar -cvf U11D045S01.tgz U11D045S01
+
+
