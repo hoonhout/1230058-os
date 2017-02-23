@@ -1,5 +1,10 @@
+22 Feb
+-Fix OD transmission script (it creates the folder name based on OO not OD
+-Ask Bas how to update the SCRIPTS dir (sync/commit/push/pull)
+-Ask Jamie to update the checkbulk.py script to say 240 min limit ?
+
 21 Feb
-- Run take longer to Run in Amazon. The checkbulk scirpt says all 500 runs took more than 180 minutes to run in total (even for the NZ grid???). 
+- Run take longer to Run in Amazon. The checkbulk scirpt says all 50 runs took more than 180 minutes to run in total (even for the NZ grid???). 
 - For now it was decided to keep all the output figures and files and just copy them to the P drive. At a later stage it might be needed to create a visualizer to see figure directly on Amazon.
 
 20 feb

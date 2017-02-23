@@ -20,5 +20,10 @@ physical checks										per run					ready?
 
 
 
-
-
+?      alle NZ rvw in 1 plot?
+?      scatterplots Hm0 buiten vs Hm0 binnen; windsnelheid in kleur, waterstanden met elkaar verbonden lijnen
+?      list with computational time for each run
+?      per uitvoerlocatie (scatterplots): golfsteilheid vs golfhoogte, golfperiode en windsnelheid (fig 4.4)
+                           golfperiode vs golfhoogte en windsnelheid (fig 4.5)   
+			   brekerparameter vs golfhoogte, golfperiode en windsnelheid (fig 4.6)
+       minimale en maximale waarde als functie van uitvoerlocatie (en dan in kleur de windsnelheid en marker windrichting?)			   
