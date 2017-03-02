@@ -22,8 +22,8 @@ Transdir=$1
 NZdir="${Transdir:0:12}NZa"
 cd "${Dir_name:3:4}/$NZdir"
 source /opt/python/pythonsource.sh
-source /p/1230058-os/virtualenvs/oosterschelde/bin/activate
-wavetrans "$NZdir"_01.SP2 /p/1230058-os/swanmodel/TEST01/INPVAR/RVW/ --closed
+source /p/11200556-os/golven/virtualenvs/oosterschelde/bin/activate
+wavetrans $1_01.SP2 /p/11200556-os/golven/SWAN01/INPVAR/RVW/ --closed
 cd ../../
 
 
@@ -53,13 +53,13 @@ cd $rundir
 
 echo Post-processing will start.
 
-outdir=/p/1230058-os/swanmodel/TEST01/CONTROL/
-scriptdir=/p/1230058-os/swanmodel/TEST01/SCRIPTS/PhysChecks/
+outdir=/p/11200556-os/golven/SWAN01/CONTROL/
+scriptdir=/p/11200556-os/golven/SWAN01/SCRIPTS/PhysChecks/
 cd $scriptdir
 python plspectra.py "$rundir/${Dir_name:3:4}/$1" $outdir
 python plmaps.py "$rundir/${Dir_name:3:4}/$1" $outdir
 
-scriptdir=/p/1230058-os/swanmodel/TEST01/SCRIPTS/ProcChecks/
+scriptdir=/p/11200556-os/golven/SWAN01/SCRIPTS/ProcChecks/
 cd $scriptdir
 python plconvergence.py "$rundir/${Dir_name:3:4}/$1" $outdir
 
