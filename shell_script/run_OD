@@ -23,7 +23,7 @@ NZdir="${Transdir:0:12}NZa"
 cd "${Dir_name:3:4}/$NZdir"
 source /opt/python/pythonsource.sh
 source /p/11200556-os/golven/virtualenvs/oosterschelde/bin/activate
-wavetrans $1_01.SP2 /p/11200556-os/golven/SWAN01/INPVAR/RVW/ --closed
+wavetrans "$NZdir"_01.SP2 /p/11200556-os/golven/SWAN01/INPVAR/RVW/ --closed
 cd ../../
 
 
