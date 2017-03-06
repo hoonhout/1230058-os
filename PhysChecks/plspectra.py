@@ -27,7 +27,7 @@ def plspectra(pathInp, pathOut):
     tmp=os.path.split(pathInp)[0];
     tmp2=os.path.split(tmp)[0];
     tmp3=os.path.split(tmp2)[0];
-    lb_file=os.path.join(tmp3, '0prepare', 'PhysChecks', 'landboundary.txt'); 
+    lb_file=os.path.join(tmp3, 'PhysChecks', 'landboundary.txt'); 
     
     Hm0=[];
     Tp=[];
