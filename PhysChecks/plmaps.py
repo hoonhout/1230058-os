@@ -154,11 +154,13 @@ def plotobstacles(obs):
 if __name__=='__main__':
     if len(sys.argv) > 1:
         plglobmaps(sys.argv[1], sys.argv[2])
-        pllocmaps(sys.argv[1], sys.argv[2]) 
+        if not sys.argv[1][-3:-1]=='NZ':
+            pllocmaps(sys.argv[1], sys.argv[2]) 
     else:
-        nameRun="U20D315Lp100OOa";    
+        nameRun="U20D315Lp100NZa";    
         pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST" + os.path.sep + "D315c" + os.path.sep + nameRun
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
-        plglobmaps(pathInp, pathOut);  
-#        pllocmaps(pathInp, pathOut)
+#        plglobmaps(pathInp, pathOut);
+        if not pathInp[-3:-1]=='NZ':
+            pllocmaps(pathInp, pathOut)
