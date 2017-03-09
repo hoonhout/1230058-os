@@ -16,10 +16,10 @@ wlev=xlsread(file_name,'Sheet2','G2:G30');  %wlev={'-2.0',   '4.0'   };%this sho
 L= {'m200' 'm175' 'm150' 'm125' 'm100' 'm075' 'm050' 'm025' 'm000' 'p025' 'p050' 'p075' 'p100' 'p125' 'p150' 'p175' 'p200' 'p225' 'p250' 'p275' 'p299' 'p300' 'p350' 'p400' 'p450' 'p500' 'p550' 'p600' 'p650'};
 
 %interpolate/extrapolate wave conditions
-winddir = xlsread(file_name,'Sheet1','A3:A56');
-windspd = xlsread(file_name,'Sheet1','B3:B56');
-hs = xlsread(file_name,'Sheet1','D3:D56');
-tp = xlsread(file_name,'Sheet1','E3:E56');
+winddir = xlsread(file_name,'Sheet1','A3:A62');
+windspd = xlsread(file_name,'Sheet1','B3:B62');
+hs = xlsread(file_name,'Sheet1','D3:D62');
+tp = xlsread(file_name,'Sheet1','E3:E62');
 
 f_hs=scatteredInterpolant(winddir,windspd,hs);
 f_tp=scatteredInterpolant(winddir,windspd,tp);
