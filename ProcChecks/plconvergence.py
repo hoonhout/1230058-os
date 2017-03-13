@@ -133,7 +133,7 @@ if __name__=='__main__':
     else:
 #        nameRun="U20D315Lp100OOa";    
 #        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST" + os.path.sep + "D315c" + os.path.sep + nameRun
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST8\D203\U10D203Lp400ODa"
+        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST8\D203\U10D203Lm000ODa"
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
         plconvergence(pathInp, pathOut)

@@ -22,18 +22,18 @@ def checkbulk(pathInp, pathOut, region):
     
     Dir=os.path.split(pathInp)[1];
     
-    timeLim=3*60; # how long should the runtime be (minutes)
+    timeLim=4.5*60; # how long should the runtime be (minutes)
     
     # max iterations vary per region
     if region=='NZ':
         maxIt=80;
         region2="NZ"
     elif region=='OO':
-        maxIt=60;
+        maxIt=80;
         region2="OO"
         region="OS";
     elif region=="OD":
-        maxIt=60;
+        maxIt=80;
         region2="OD"
         region="OS";
     minIt=10;
