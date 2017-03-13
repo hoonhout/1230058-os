@@ -44,7 +44,7 @@ def checkbulk(pathInp, pathOut, region):
     # initialize structure to count failed runs, and run names
     counter=0;
     for i in range(0,len(ListRuns)):    
-        if ListRuns[i][12:13]==region[0]:
+        if ListRuns[i][12:13]==region[0] and os.path.exists(os.path.join(pathInp, ListRuns[i],ListRuns[i] + '.PRT')):
             counter=counter+1; 
     
     Summary = np.zeros((counter,6));
@@ -58,12 +58,11 @@ def checkbulk(pathInp, pathOut, region):
     
     counter=0;
     # loop through runs
-    for i in range(0,len(ListRuns)):    
-        if ListRuns[i][12:13]==region[0]:
+    for i in range(0,len(ListRuns)):
+        DirectoryRes2 = os.path.join(pathInp, ListRuns[i])
+        if ListRuns[i][12:13]==region[0] and os.path.exists(os.path.join(DirectoryRes2,ListRuns[i] + '.PRT')):
             RunName.append(ListRuns[i])        
-            
-            DirectoryRes2 = os.path.join(pathInp, ListRuns[i])      
-            
+  
     ############# check if TAB, NC, SP1 and SP2 files all exist ###################
             check=0;   
             if not os.path.exists(os.path.join(DirectoryRes2, ListRuns[i] + '.NC')):
@@ -217,8 +216,8 @@ if __name__=='__main__':
     if len(sys.argv) > 1:
         checkbulk(sys.argv[1], sys.argv[2], sys.argv[3]) 
     else:
-        Dir="D293";
+        Dir="D248";
         region='NZ'; # NZ or OO or OD
-        pathInp=r"P:\1230058-os\swanmodel\TEST01\RUN_TEST7" + os.path.sep + Dir;
+        pathInp=r"p:\11200556-os\golven\SWAN01\RUN" + os.path.sep + Dir;
         pathOut=r'p:\1230058-os\swanmodel\TEST01\CONTROL';
         checkbulk(pathInp, pathOut, region);

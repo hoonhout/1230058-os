@@ -65,7 +65,7 @@ def readPrint(path,region):
     while line:
         if "accuracy OK in" in line: 
             it2=it2+1;
-            p[it2+nanv]=(line[17:22]);
+            p[it2+nanv]=(line[16:22]);
         if "+SWAN is processing output request" in line:
             break    
         line=fp.readline();        
