@@ -21,7 +21,7 @@ def plchecktransmission(pathInp, pathOut):
         
     # range of conditions that will be available
     Directions=np.array([203, 225, 248, 270, 293, 315, 338, 360]);
-    WindSpd=np.arange(10,54,4);
+    WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
     WatLev=np.concatenate((np.arange(-2,2.76,0.25),np.arange(2.99,3,2),np.arange(3,6.6,0.5)), axis=0)
     OpenClose=['O', 'D']
     

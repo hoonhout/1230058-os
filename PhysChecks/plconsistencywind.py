@@ -49,7 +49,7 @@ def plconsistencywind(pathInp, pathOut):
     
     # range of conditions that will be available
     Directions=np.array([203, 225, 248, 270, 293, 315, 338, 360]);
-    WindSpd=np.arange(10,54,4);
+    WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
     WatLev=np.concatenate((np.arange(-2,2.76,0.25),np.arange(2.99,3,2),np.arange(3,6.6,0.5)), axis=0)
     OpenClose=['O', 'D']
     
@@ -63,7 +63,6 @@ def plconsistencywind(pathInp, pathOut):
     color=cm.rainbow(np.linspace(0,1,len(WindSpd)))
     
     # initialize structures
-    result = np.zeros((len(WindSpd), 2038))* np.nan # 2039 is the number of locations in TAB01
     xVal=np.zeros(2038);
     xVal=np.linspace(1, 2038, num=2038)
     
@@ -80,6 +79,7 @@ def plconsistencywind(pathInp, pathOut):
                         else: # Me
                             fig=plt.figure(1, figsize=(30,80)) 
                         figPlot=0;
+                        result = np.zeros((len(WindSpd), 2038))* np.nan # 2039 is the number of locations in TAB01
                         for j in range(0, len(WindSpd)):
                             if WatLev[k]<0:
                                 WatKey='Lm';
@@ -113,9 +113,11 @@ def plconsistencywind(pathInp, pathOut):
                                      xVal = np.ma.masked_where(np.isnan(result[j,:]), xVal)
                                      yVal = np.ma.masked_where(np.isnan(result[j,:]), result[j,:])
                                      h1=plt.subplot(2,1,1)                                
-                                     plt.plot(xVal[0:1038], yVal[0:1038], c=color[j], label=str(WindSpd[j])+"m/s")
+                                     plt.plot(xVal[0:1038], yVal[0:1038], c=color[j], label=str(WindSpd[j])+"m/s", linewidth=0.5)
+                                     plt.xticks(np.arange(min(xVal)-1, max(xVal), 50.0))                                     
                                      plt.subplot(2,1,2)                                
-                                     plt.plot(xVal[1038:], yVal[1038:], c=color[j], label=str(WindSpd[j])+"m/s")
+                                     plt.plot(xVal[1038:], yVal[1038:], c=color[j], label=str(WindSpd[j])+"m/s", linewidth=0.5)
+                                     plt.xticks(np.arange(min(xVal)-1, max(xVal), 50.0))                                         
                                      figPlot=1;
                                      xVal=np.linspace(1, 2038, num=2038)
                         if p==0:             
@@ -169,7 +171,7 @@ if __name__=='__main__':
         plconsistencywind(sys.argv[1], sys.argv[2])
 
     else:
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST7";
+        pathInp=r"p:\11200556-os\golven\SWAN01\RUN";
         pathOut=r'p:\1230058-os\swanmodel\TEST01\CONTROL';
         
         plconsistencywind(pathInp, pathOut); 
