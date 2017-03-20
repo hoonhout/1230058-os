@@ -15,7 +15,7 @@ for i1=1:length(d1);
 	for i2=1:length(d2);
 		if d2(i2).isdir==1
 			cd(d2(i2).name);
-			d3=dir('*.PRT');
+			d3=dir('*04.SP2');
 			if ~isempty(d3);
 				runidname=d3.name(1:14);
 				runidlist=[runidlist; runidname];

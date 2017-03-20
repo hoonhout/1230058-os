@@ -217,7 +217,7 @@ if __name__=='__main__':
     if len(sys.argv) > 1:
         checkbulk(sys.argv[1], sys.argv[2], sys.argv[3]) 
     else:
-        region='OO'; # NZ or OO or OD
+        region='OD'; # NZ or OO or OD
         pathInp=r"p:\11200556-os\golven\SWAN01\RUN";
         pathOut=r'p:\1230058-os\swanmodel\TEST01\CONTROL';
         checkbulk(pathInp, pathOut, region);
