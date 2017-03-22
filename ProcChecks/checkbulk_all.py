@@ -68,21 +68,36 @@ def checkbulk(pathInp, pathOut, region):
         check=0;   
         if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '.NC')):
            check=check+1; 
-        if region=='NZ':           
-            for j in range(1,5):
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP1')):
+        if region=='NZ': 
+            
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.SP1.zip')):
+                check=check+1;       
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.SP2.zip')):
+                check=check+1;
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.TAB')):
+                check=check+1;            
+            
+            for j in range(2,5):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP1.zip')):
                     check=check+1;       
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP2')):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP2.zip')):
                     check=check+1;
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.TAB')):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.TAB.zip')):
                     check=check+1;
         if region=='OS':           
-            for j in range(1,7):
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP1')):
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.SP1.zip')):
+                check=check+1;       
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.SP2.zip')):
+                check=check+1;
+            if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(1) + '.TAB')):
+                check=check+1;            
+            
+            for j in range(2,7):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP1.zip')):
                     check=check+1;       
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP2')):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.SP2.zip')):
                     check=check+1;
-                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.TAB')):
+                if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '_0' + str(j) + '.TAB.zip')):
                     check=check+1;
         
         if check>0:
