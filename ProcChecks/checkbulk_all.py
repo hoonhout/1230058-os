@@ -66,7 +66,7 @@ def checkbulk(pathInp, pathOut, region):
   
 ############# check if TAB, NC, SP1 and SP2 files all exist ###################
         check=0;   
-        if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '.NC')):
+        if not os.path.exists(os.path.join(DirectoryRes2, RunName[i] + '.NC.zip')):
            check=check+1; 
         if region=='NZ': 
             
