@@ -69,7 +69,7 @@ def plconsistencywind(pathInp, pathOut):
     
     for p in range(0,2):
         # determine available results
-        for i in range(7, len(Directions)):
+        for i in range(0, len(Directions)):
             if os.path.isdir(os.path.join(pathInp, "D" + Directions2[i])):
                 pathRes2=os.path.join(pathInp, "D" + Directions2[i]);
                 if Directions[i]<181:
