@@ -20,7 +20,8 @@ def plchecktransmission(pathInp, pathOut):
         os.makedirs(pathOut)  
         
     # range of conditions that will be available
-    Directions=np.array([203, 225, 248, 270, 293, 315, 338, 360]);
+    Directions=np.array([23, 180, 203, 225, 248, 270, 293, 315, 338, 360]);
+    Directions2=['023', '180', '203', '225', '248', '270', '293', '315', '338', '360'];
     WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
     WatLev=np.concatenate((np.arange(-2,2.76,0.25),np.arange(2.99,3,2),np.arange(3,6.6,0.5)), axis=0)
     OpenClose=['O', 'D']
@@ -37,8 +38,13 @@ def plchecktransmission(pathInp, pathOut):
     
     # read all available results
     for i in range(0, len(Directions)):
-        if os.path.isdir(os.path.join(pathInp, "D" + str(Directions[i]))):
-            pathRes2=os.path.join(pathInp,"D" + str(Directions[i]));
+        if os.path.isdir(os.path.join(pathInp, "D" + Directions2[i])):
+            pathRes2=os.path.join(pathInp,"D" + Directions2[i]);
+            if Directions2[i]=='023' or Directions2[i]=='180':
+                WindSpd=np.array([10,20,24,28,30,34,38]);
+            else:
+                WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
+            
             for j in range(0, len(WindSpd)):
                 for k in range(0, len(WatLev)):
                     for l in range(0, len(OpenClose)):
@@ -49,10 +55,10 @@ def plchecktransmission(pathInp, pathOut):
                             WatKey='Lp';
                             WatLev_tmp=WatLev[k];
                   
-                        RunID_K="U" + str(WindSpd[j]) +"D" + str(Directions[i]) + WatKey + str(int(WatLev_tmp*100)) + "NZa"
+                        RunID_K="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "NZa"
                         Tab_K = RunID_K + "_01.TAB" 
                         
-                        RunID_O="U" + str(WindSpd[j]) +"D" + str(Directions[i]) + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                        RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
                         Tab_O = RunID_O + "_02.TAB"
                         
                         if os.path.exists(os.path.join(pathRes2,RunID_K,Tab_K)) and l==0:
@@ -146,7 +152,11 @@ def plchecktransmission(pathInp, pathOut):
             result_K=result_K_T;
             result_O_Open=result_O_Open_T;        
             result_O_Closed=result_O_Closed_T;
-        for i in range(0, len(Directions)):       
+        for i in range(0, len(Directions)):
+            if Directions2[i]=='023' or Directions2[i]=='180':
+                WindSpd=np.array([10,20,24,28,30,34,38]);
+            else:
+                WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
             for j in range(0,2):
                 if len(sys.argv) > 1: # Amaury
                     fig=plt.figure(1, figsize=(19,9))
@@ -188,7 +198,7 @@ def plchecktransmission(pathInp, pathOut):
                         addition="tm"    
                     
     
-                    fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +"O" + OpenClose[j] +"a" + "_" + addition +".png") , dpi=200)
+                    fig.savefig(os.path.join(pathOut, "D" + Directions2[i] +"O" + OpenClose[j] +"a" + "_" + addition +".png") , dpi=200)
                     
                 plt.close(fig);
 
@@ -198,7 +208,7 @@ if __name__=='__main__':
         plchecktransmission(sys.argv[1], sys.argv[2])
 
     else:
-        pathInp=r"p:\1230058-os\swanmodel\TEST01\RUN_TEST7"
+        pathInp=r"p:\11200556-os\golven\SWAN01\RUN"
         pathOut=r"p:\1230058-os\swanmodel\TEST01\CONTROL"
         
         plchecktransmission(pathInp, pathOut);  

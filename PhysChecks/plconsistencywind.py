@@ -48,7 +48,8 @@ def plconsistencywind(pathInp, pathOut):
         os.makedirs(pathOut)
     
     # range of conditions that will be available
-    Directions=np.array([203, 225, 248, 270, 293, 315, 338, 360]);
+    Directions=np.array([23,45,68,90,113,135,158,180, 203, 225, 248, 270, 293, 315, 338, 360]);
+    Directions2=['023', '045', '068','90', '113', '135', '158','180', '203', '225', '248', '270', '293', '315', '338', '360'];
     WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
     WatLev=np.concatenate((np.arange(-2,2.76,0.25),np.arange(2.99,3,2),np.arange(3,6.6,0.5)), axis=0)
     OpenClose=['O', 'D']
@@ -68,9 +69,13 @@ def plconsistencywind(pathInp, pathOut):
     
     for p in range(0,2):
         # determine available results
-        for i in range(0, len(Directions)):
-            if os.path.isdir(os.path.join(pathInp, "D" + str(Directions[i]))):
-                pathRes2=os.path.join(pathInp, "D" + str(Directions[i]));
+        for i in range(7, len(Directions)):
+            if os.path.isdir(os.path.join(pathInp, "D" + Directions2[i])):
+                pathRes2=os.path.join(pathInp, "D" + Directions2[i]);
+                if Directions[i]<181:
+                    WindSpd=np.array([10,20,24,28,30,34,38]);
+                else:
+                    WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
                 for k in range(0, len(WatLev)):
                     for l in range(0, len(OpenClose)):
                         # initialize fig;
@@ -88,7 +93,7 @@ def plconsistencywind(pathInp, pathOut):
                                 WatKey='Lp';
                                 WatLev_tmp=WatLev[k];
                       
-                            RunID_O="U" + str(WindSpd[j]) +"D" + str(Directions[i]) + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                            RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
                             Tab_O = RunID_O + "_01.TAB"
                              
                             if os.path.exists(os.path.join(pathRes2, RunID_O,Tab_O)):
@@ -157,9 +162,9 @@ def plconsistencywind(pathInp, pathOut):
                                 WatKey='Lp';
                                 WatLev_tmp=WatLev[k];
                             if p==0:
-                                fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_hs" +".png") , dpi=300)
+                                fig.savefig(os.path.join(pathOut, "D" + Directions2[i] +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_hs" +".png") , dpi=300)
                             else:
-                                fig.savefig(os.path.join(pathOut, "D" + str(Directions[i]) +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_tm" +".png") , dpi=300) 
+                                fig.savefig(os.path.join(pathOut, "D" + Directions2[i] +WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a_tm" +".png") , dpi=300) 
                             plt.close(fig);
                                         
 
