@@ -69,15 +69,18 @@ def plconsistencywind(pathInp, pathOut):
     
     for p in range(0,2):
         # determine available results
-        for i in range(0, len(Directions)):
+#        for i in range(0, len(Directions)):
+        for i in range(0, 1):
             if os.path.isdir(os.path.join(pathInp, "D" + Directions2[i])):
                 pathRes2=os.path.join(pathInp, "D" + Directions2[i]);
                 if Directions[i]<181:
                     WindSpd=np.array([10,20,24,28,30,34,38]);
                 else:
                     WindSpd=np.array([10,20,24,28,30,34,38,42,46,50]);
-                for k in range(0, len(WatLev)):
-                    for l in range(0, len(OpenClose)):
+#                for k in range(0, len(WatLev)):
+                for k in range(0, 1):
+#                    for l in range(0, len(OpenClose)):
+                    for l in range(0, 1):
                         # initialize fig;
                         if len(sys.argv) > 1: # Amaury
                             fig=plt.figure(1, figsize=(16,6))

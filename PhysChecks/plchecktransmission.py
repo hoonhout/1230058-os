@@ -48,17 +48,24 @@ def plchecktransmission(pathInp, pathOut):
             for j in range(0, len(WindSpd)):
                 for k in range(0, len(WatLev)):
                     for l in range(0, len(OpenClose)):
-                        if WatLev[k]<0:
+                        if WatLev[k]<=0:
                             WatKey='Lm';
                             WatLev_tmp=WatLev[k]*-1;
                         else:
                             WatKey='Lp';
                             WatLev_tmp=WatLev[k];
-                  
-                        RunID_K="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "NZa"
-                        Tab_K = RunID_K + "_01.TAB" 
+                        if WatLev_tmp>=1:
+                            RunID_K="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "NZa"
+                            RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                        elif WatLev_tmp>0 and WatLev_tmp<1:
+                            RunID_K="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + '0' + str(int(WatLev_tmp*100)) + "NZa"
+                            RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + '0'+ str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                        else:
+                            RunID_K="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + '00' + str(int(WatLev_tmp*100)) + "NZa"
+                            RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + '00'+ str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                            
                         
-                        RunID_O="U" + str(WindSpd[j]) +"D" + Directions2[i] + WatKey + str(int(WatLev_tmp*100)) + "O" + OpenClose[l] + "a"
+                        Tab_K = RunID_K + "_01.TAB" 
                         Tab_O = RunID_O + "_02.TAB"
                         
                         if os.path.exists(os.path.join(pathRes2,RunID_K,Tab_K)) and l==0:
